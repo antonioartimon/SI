@@ -1,0 +1,33 @@
+#include <DAVE.h>
+#include<stdio.h>
+
+int main(void)
+{
+	int i=0 ,j;
+
+
+
+	DAVE_Init();
+	BUS_IO_Write (&nrBinar, 0xFF); //sting ledurile
+
+	while(1U)
+	{
+		do{
+			if(DIGITAL_IO_GetInput (&buton1)==0)
+			{
+				i++;
+				BUS_IO_Write (&nrBinar,i^0xff);
+				for (j=0;j<0xfffff;j++);
+			}
+			if(DIGITAL_IO_GetInput (&buton2)==0)
+			{
+				i--;
+				BUS_IO_Write (&nrBinar,i^0xff);
+				for (j=0;j<0xfffff;j++);
+			}
+		}while(i<16);
+
+
+   }
+	return 1;
+}
